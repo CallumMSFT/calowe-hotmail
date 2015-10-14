@@ -1,7 +1,9 @@
 workflow Module7_StartVM
 {
     Param (
-    # get the name of the VM you are to start
+    # spurious comment
+	
+	# get the name of the VM you are to start
     [Parameter(Mandatory)] $VMName = "e.g. calowe1210 (without the quotes)",
 
     # and the cloud service that contains your VM
