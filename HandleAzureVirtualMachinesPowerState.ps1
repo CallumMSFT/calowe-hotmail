@@ -12,7 +12,7 @@ Workflow HandleAzureVirtualMachinesPowerState
         [String] $TagValue
     ) 
 
-    ## Authentication
+    ## Authentication  
     Write-Output ""
     Write-Output "------------------------ Authentication ------------------------"
     Write-Output "Logging in to Azure ..."
