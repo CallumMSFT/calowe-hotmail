@@ -1,0 +1,16 @@
+{
+  "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "DSCRegistrationKey": {
+      "reference": {
+        "keyVault": {
+          "id": "/subscriptions/cea8775b-a622-4012-bb21-0062e328a843/resourceGroups/Management/providers/Microsoft.KeyVault/vaults/techhui"
+        },
+        "secretName": "DSCRegistrationKey"
+      }
+    }
+  }
+}
+
+

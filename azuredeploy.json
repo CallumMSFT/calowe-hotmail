@@ -2,12 +2,6 @@
   "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
-    "vmName": {
-      "type": "string",
-      "metadata": {
-        "description": "Name of the VM"
-      }
-    },
     "DSCRegistrationKey": {
       "type": "securestring",
       "metadata": {
@@ -34,6 +28,7 @@
     "vmSize": "Standard_A4",
     "storageAccountType": "Standard_LRS",
     "UniqueStorageAccountName": "[concat('storage', uniquestring(subscription().subscriptionId, resourceGroup().id))]",
+    "UniqueVMName": "[concat('vm', uniquestring(subscription().subscriptionId, resourceGroup().id))]",
     "DSCmodulesURL": "https://github.com/CallumMSFT/calowe-hotmail/raw/master/UpdateLCMforAAPull.zip",
     "DSCregistrationURL": "https://ase-agentservice-prod-1.azure-automation.net/accounts/ea885351-5899-4c32-b139-32cba4a3a125",
     "DSCconfigurationFunction": "UpdateLCMforAAPull.ps1\\ConfigureLCMforAAPull",
@@ -115,7 +110,7 @@
     {
       "apiVersion": "2015-05-01-preview",
       "type": "Microsoft.Compute/virtualMachines",
-      "name": "[parameters('vmName')]",
+      "name": "[variables('UniquevmName')]",
       "location": "[resourceGroup().location]",
       "dependsOn": [
         "[concat('Microsoft.Storage/storageAccounts/', variables('UniqueStorageAccountName'))]",
@@ -126,7 +121,7 @@
           "vmSize": "[variables('vmSize')]"
         },
         "osProfile": {
-          "computerName": "[parameters('vmName')]",
+          "computerName": "[variables('UniquevmName')]",
           "adminUsername": "[variables('adminUsername')]",
           "adminPassword": "[variables('adminPassword')]"
         },
@@ -157,11 +152,11 @@
     },
     {
       "type": "Microsoft.Compute/virtualMachines/extensions",
-      "name": "[concat(parameters('vmName'),'/vmExtensionDSC')]",
+      "name": "[concat(variables('UniquevmName'),'/vmExtensionDSC')]",
       "apiVersion": "2015-06-15",
       "location": "[resourceGroup().location]",
       "dependsOn": [
-        "[concat('Microsoft.Compute/virtualMachines/', parameters('vmName'))]"
+        "[concat('Microsoft.Compute/virtualMachines/', variables('UniquevmName'))]"
       ],
       "properties": {
         "publisher": "Microsoft.Powershell",
@@ -235,5 +230,11 @@
         }
       }
     }
-  ]
+  ],
+  "outputs": {
+    "vmName": {
+      "type": "string",
+      "value": "[variables('uniqueVMName')]"
+    }
+  }
 }
