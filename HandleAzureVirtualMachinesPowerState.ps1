@@ -15,7 +15,7 @@ Workflow HandleAzureVirtualMachinesPowerState
     ## Authentication  
     Write-Output ""
     Write-Output "------------------------ Authentication ------------------------"
-    Write-Output "Logging in to Azure ..."
+    Write-Output "Logging in to Azure..."
 
     try
     {
