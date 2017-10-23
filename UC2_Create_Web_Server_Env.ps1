@@ -1,6 +1,6 @@
 $connectionName = "AzureRunAsConnection"
 
-# Get the connection "AzureRunAsConnection"
+# Get the connection "AzureRunAsConnection "
 $servicePrincipalConnection = Get-AutomationConnection -Name $connectionName         
 
 $null = Add-AzureRmAccount `
