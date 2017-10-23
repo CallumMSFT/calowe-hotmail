@@ -21,4 +21,4 @@ $creationoutput = New-AzureRmResourceGroupDeployment `
 
 $creationoutput.OutputsString
 
-$creationoutput.Outputs
+
